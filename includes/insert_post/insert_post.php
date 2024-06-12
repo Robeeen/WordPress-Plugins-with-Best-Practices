@@ -11,7 +11,8 @@ function form_submission() {
             'post_content' => sanitize_textarea_field($_POST['fpc_content']),
             'post_status'  => 'publish',
             'post_author'  => get_current_user_id(),
-            'post_type'    => 'post'
+            'post_type'    => 'post',
+            'post_category' => array(31),
         );
 
         $post_id = wp_insert_post($new_post);
