@@ -15,13 +15,13 @@ function form_submission() {
             'post_category' => array(31),
         );
 
-        $post_id = wp_insert_post($new_post);
+        $post_id = wp_insert_post($new_post, $wp_error);
 
         if ($post_id) {
             wp_redirect(get_permalink($post_id));
             exit;
         } else {
-            echo 'There was an error creating the post.';
+            echo 'There was an error creating the post' . $wp_error;
         }
     }
 }
