@@ -5,6 +5,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
 }
 
-$option_name = 'wporg_option';
+$option_name = 'new_form';
 
 delete_option( $option_name );
