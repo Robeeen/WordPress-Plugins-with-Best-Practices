@@ -27,3 +27,4 @@ function form_submission() {
 }
 
 add_action('template_redirect', 'form_submission' );
+

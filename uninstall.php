@@ -5,22 +5,26 @@
 register_deactivation_hook( __FILE__, 'deactivate_plugin' );
 
 function deactivate_plugin() {
-    $category = get_category_by_slug('july');
+    $category = get_the_category_by_ID(31);
 
-    if ($category) {
-        $category_id = $category->term_id;
+   
 
         // Query for all posts in the "Jun" category.
         $args = array(
-            'category' => $category_id,
+            'category_name' => $category,
             'posts_per_page' => -1, // Get all posts.
-            'fields' => 'ids', // Return only post IDs.
+            'post_status' => array('any'), // Return only post IDs.
         );
 
 
     $total_posts = get_posts($args);
+
     foreach($total_posts as $post){
-        wp_delete_post($post, true);
-    }
+        if ( ! is_admin() ){
+            echo "not an authorised";
+        }else{
+            wp_delete_post($post, true);
+        }
+
     }
 }
