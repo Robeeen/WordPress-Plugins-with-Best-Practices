@@ -36,7 +36,26 @@ define( 'MY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 include( MY_PLUGIN_PATH . 'includes/enqueue_scripts/enque_files.php');
 include( MY_PLUGIN_PATH . 'includes/shortcodes/shortcodes.php');
 include( MY_PLUGIN_PATH . 'includes/insert_post/insert_post.php');
-include( MY_PLUGIN_PATH . 'uninstall.php');
+//include( MY_PLUGIN_PATH . 'includes/uninstall/uninstall.php');
+
+// register_deactivation_hook( __FILE__, 'deactivate_plugin' );
+
+// function deactivate_plugin() {
+//     $category = get_the_category_by_ID(31);  
+
+//         // Query for all posts in the "Jun" category.
+//         $args = array(
+//             'category_name' => $category,
+//             'posts_per_page' => -1, // Get all posts.
+//             'post_status' => array('any'), // Return only post IDs.
+//         );
+
+//     if($total_posts = get_posts($args)){
+//         foreach($total_posts as $post){
+//             wp_delete_post($post->ID, true);
+//         }
+//     }
+// }
 
 
 

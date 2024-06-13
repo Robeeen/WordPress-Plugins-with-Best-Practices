@@ -1,8 +1,9 @@
 <?php
 
 // if uninstall.php is not called by WordPress, die
-
-register_deactivation_hook( __FILE__, 'deactivate_plugin' );
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+    die;
+}
 
 function deactivate_plugin() {
     $category = get_the_category_by_ID(31);
@@ -16,15 +17,9 @@ function deactivate_plugin() {
             'post_status' => array('any'), // Return only post IDs.
         );
 
-
-    $total_posts = get_posts($args);
-
-    foreach($total_posts as $post){
-        if ( ! is_admin() ){
-            echo "not an authorised";
-        }else{
-            wp_delete_post($post, true);
+    if($total_posts = get_posts($args)){
+        foreach($total_posts as $post){
+            wp_delete_post($post);
         }
-
     }
 }
