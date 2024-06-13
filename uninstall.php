@@ -4,18 +4,23 @@
 
 register_deactivation_hook( __FILE__, 'deactivate_plugin' );
 
-function deactivate_plugin($category_id) {
+function deactivate_plugin() {
+    $category = get_category_by_slug('july');
 
-    $args = array(
-        'category' => $category_id,
-        'numberposts' => -1, // Fetch all posts
-        'post_status' => 'any' // Include drafts, published, etc.
-    );
+    if ($category) {
+        $category_id = $category->term_id;
+
+        // Query for all posts in the "Jun" category.
+        $args = array(
+            'category' => $category_id,
+            'posts_per_page' => -1, // Get all posts.
+            'fields' => 'ids', // Return only post IDs.
+        );
+
 
     $total_posts = get_posts($args);
     foreach($total_posts as $post){
-        wp_delete_post($post->ID, true);
+        wp_delete_post($post, true);
     }
-
+    }
 }
-deactivate_plugin(31);
