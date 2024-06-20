@@ -18,7 +18,8 @@ function form_submission() {
         $post_id = wp_insert_post($new_post, $wp_error);
 
         if ($post_id) {
-            wp_redirect(get_permalink($post_id));
+            // wp_redirect(get_permalink($post_id)); //Display the Post iteself
+            wp_redirect(get_category_link( 31 )); //redirect to the category/july page
             exit;
         } else {
             echo 'There was an error creating the post' . $wp_error;
